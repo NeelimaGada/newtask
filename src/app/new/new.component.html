@@ -1,0 +1,41 @@
+<h1 class="h1">ASSESMENT</h1>
+<div>
+
+  <input type="text"  type="search" [(ngModel)]="term" placeholder="Search" class="form-control"> 
+</div>
+<div class="modal-body">
+         <table class="table table-bordered" style="width:100%" >
+             <tr>
+              <th>TITLE</th>
+              <th>URL</th>
+              <th>CREATED_AT</th>
+              <th>AUTHOR</th>
+             </tr>
+             <tr *ngFor="let d of result | service: term" (click)="click(d)"   [ngClass] = "{'neelu':d==dis}"  data-toggle="modal" data-target="#neelu">
+              <td>{{d.title}}</td>
+              <td>{{d.url}}</td>
+              <td>{{d.created_at | date:' M/d/yy, h:mm a,EEEE'}}</td>
+              <td>{{d.author}}</td>
+             </tr>
+            </table>
+            <h2 class="text-danger" *ngIf="(result |service:term)?.length==0">NO RESULT</h2>
+        </div>
+
+        <div class="modal" id="neelu">
+            <div class="modal-dialog modal-xl">
+              <div class="modal-content">
+                <div class="modal-header">
+                
+<button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                
+                 <pre>{{dis|json}}</pre>
+                
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+          </div>
+            </div>
+        
